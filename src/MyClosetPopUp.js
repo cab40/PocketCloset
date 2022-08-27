@@ -8,7 +8,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import "@fontsource/montserrat";
-import { AccordionCollapse } from "react-bootstrap";
 import addIcon from "./add.png"; 
 // import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,38 +18,44 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 // import { styled } from '@mui/material/styles';
 import closeIcon from "./close.png"; 
+import "./MyClosetPopUp.css"; 
 
-const data = [
+let data = [
     {
       key: 0,
       name: "Tops",
-      quantity: 2, 
-      pieces: ["Tank top", "blah blah blah"]
+      quantity: 0, 
+      pieces: [], 
     }, 
     {
         key: 1,
         name: "Pants", 
-        quantity: 2, 
+        quantity: 0, 
+        pieces: [], 
     }, 
     {
         key: 2,
         name: "Jeans", 
-        quantity: 4, 
+        quantity: 0, 
+        pieces: [], 
     }, 
     {
         key: 3,
         name: "Sweaters & Cardigans", 
-        quantity: 13, 
+        quantity: 0, 
+        pieces: [], 
     },
     {
         key: 4,
         name: "Hoodies & Sweatshirts", 
-        quantity: 13, 
+        quantity: 0, 
+        pieces: [], 
     },
     {
         key: 5,
         name: "Skirts", 
-        quantity: 13, 
+        quantity: 0, 
+        pieces: [], 
     }
   ]
 
@@ -99,6 +104,12 @@ function MyClosetPopUp() {
     const [fit, setFit] = React.useState("fitted"); 
     const [length, setLength] = React.useState(""); 
     const [color, setColor] = React.useState(""); 
+    // const [tops, setTops] = React.useState([]); 
+    // const [pants, setPants] = React.useState([]); 
+    // const [jeans, setJeans] = React.useState([]); 
+    // const [sweaters, setSweaters] = React.useState([]); 
+    // const [hoodies, setHoodies] = React.useState([]); 
+    // const [skirts, setSkirts] = React.useState
 
     const initialState = [{type: "", color: "", fit: "", length: ""}]
     const [closetItems, setClosetItems] = useState([{}]); 
@@ -106,12 +117,15 @@ function MyClosetPopUp() {
     const addClosetItem = (type, color, fit, length) => {
       console.log("items: ", closetItems); 
       setClosetItems(current => [...current, {type: type, color: color, fit: fit, length: length}])
+      for (let i = 0; i < 5; i++) {
+        if (data[i].name === type) {
+          data[i].quantity++; 
+          data[i].pieces.push({color: color, fit: fit, length: length})
+        }
+      }
       console.log("updated items: ", closetItems); 
       setShowAddItem(false); 
     }
-
-    //      console.log("type: ", type, ", color: ", color, ", fit: ", fit, ", length: ", length)
-
 
     const handleFit = (event) => {
       setFit(event.target.value);
@@ -219,7 +233,7 @@ function MyClosetPopUp() {
         </div>
       </Modal>
       </div>
-      <div className='lists' style={{flexDirection: "column", maxWidth: 250}}>
+      <div className='lists' style={{flexDirection: "column", maxWidth: 300}}>
 
         {lists && lists.map((item) => {
           return(
@@ -228,8 +242,18 @@ function MyClosetPopUp() {
                 </AccordionSummary>
                 <AccordionDetails>
           <div>
-            {item.pieces && item.pieces.map((piece) => {
-                return <div>{piece}</div>
+            {item.pieces.length !==0 && item.pieces.map((piece, index) => {
+                let colorIndex = colors.map(object => object.name).indexOf(piece.color); 
+                let num = index + 1;
+                return <div style={{flexDirection: "row", marginBottom: 15}}>
+                  <span>{num + " : "}</span>
+                  <span className="product-detail">
+                  <span style={{display: "inline-block", backgroundColor: colors[colorIndex].hex, width: 10, height: 10, marginRight: 4, alignItems: "center",  borderRadius: "100%"}}/>
+                  <span>{piece.color}</span>
+                  </span>
+                 <span className="product-detail"> {piece.fit} </span>
+                 <span className="product-detail"> {piece.length} </span>
+                 </div>
             })}
           </div>
         </AccordionDetails>

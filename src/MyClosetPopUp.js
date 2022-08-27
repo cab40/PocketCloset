@@ -1,11 +1,24 @@
 import React, {useState} from "react";
-import Accordion from '@mui/material/Accordion';
+import Accordion from '@mui/material/Accordion'; 
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import "@fontsource/montserrat";
 import { AccordionCollapse } from "react-bootstrap";
-
+import addIcon from "./add.png"; 
+// import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+// import { styled } from '@mui/material/styles';
+import closeIcon from "./close.png"; 
 
 const data = [
     {
@@ -41,8 +54,89 @@ const data = [
     }
   ]
 
+  const colors = [
+    {name: "white", 
+    hex: "#FFFFFF"
+    }, 
+    {name: "black", 
+    hex: "#363636"
+    }, 
+    {name: "grey", 
+    hex: "#A6A6A6"
+    }, 
+    {name: "red", 
+    hex: "#A54747"
+    }, 
+    {name: "orange", 
+    hex: "#D79950"
+    }, 
+    {name: "yellow", 
+    hex: "#EDE284"
+    }, 
+    {name: "green", 
+    hex: "#8EA989"
+    }, 
+    {name: "blue", 
+    hex: "#95A6C7"
+    }, 
+    {name: "purple", 
+    hex: "#A28BAD"
+    }, 
+    {name: "pink", 
+    hex: "#DABAB6"
+    }, 
+    {name: "brown", 
+    hex: "#A89074"
+    }, 
+  ]
+
+
+
 function MyClosetPopUp() {
     const [lists, setLists] = useState(data);
+    const [showAddItem, setShowAddItem] = useState(false); 
+    const [type, setType] = React.useState('');
+    const [fit, setFit] = React.useState("fitted"); 
+    const [length, setLength] = React.useState(""); 
+    const [color, setColor] = React.useState(""); 
+
+    const initialState = [{type: "", color: "", fit: "", length: ""}]
+    const [closetItems, setClosetItems] = useState([{}]); 
+
+    const addClosetItem = (type, color, fit, length) => {
+      console.log("items: ", closetItems); 
+      setClosetItems(current => [...current, {type: type, color: color, fit: fit, length: length}])
+      console.log("updated items: ", closetItems); 
+      setShowAddItem(false); 
+    }
+
+    //      console.log("type: ", type, ", color: ", color, ", fit: ", fit, ", length: ", length)
+
+
+    const handleFit = (event) => {
+      setFit(event.target.value);
+    };
+
+    const handleColor = (event) => {
+      setColor(event.target.value);
+    };
+
+    const controlFitProps = (item) => ({
+      checked: fit === item,
+      onChange: handleFit,
+      value: item,
+      name: 'color-radio-button-demo',
+      inputProps: { 'aria-label': item },
+    });
+
+    const controlColorProps = (item) => ({
+      checked: color === item,
+      onChange: handleColor,
+      value: item,
+      name: 'color-radio-button',
+      inputProps: { 'aria-label': item },
+    });
+
     const openTabs = (url) => {
       for(const link of url){
         window.open(link, "_blank");
@@ -50,8 +144,81 @@ function MyClosetPopUp() {
     }
     return (
         <div>
-            
-        <h3 style={{fontFamily: "Montserrat"}}>My closet</h3>
+        <h3 style={{fontFamily: "Montserrat"}}>My closet
+        <img src={addIcon} style={{width: 25, height: 25, marginLeft: 130, marginBottom:-5}} className="add-button" onClick={() => setShowAddItem(true)}/>
+        </h3>
+        <div>
+        <Modal
+        open={showAddItem}
+        onClose={() => setShowAddItem(false)}
+        style={{marginLeft: 20, marginTop: 50, overflowY: "scroll", paddingBottom: 15}}
+      >
+        <div style={{maxWidth: 210, maxHeight: 450, backgroundColor: "white", borderRadius: 8, padding: 20}}>
+        <h3 style={{fontFamily: "Montserrat", marginTop: 10}} >
+           New item: 
+           <img src={closeIcon} style={{width: 20, height: 20, marginLeft: 110, marginBottom: -5}} className="add-button" onClick={() => setShowAddItem(false)}/>
+        </h3>
+      
+      <FormControl sx={{ minWidth: 210, }} size="small">
+      <div style={{fontFamily: "Montserrat", fontSize: 15}}>
+           Type
+      </div>
+      <Select
+        labelId="demo-select-small"
+        id="type"
+        value={type}
+        onChange={(event) => setType(event.target.value)}
+        style={{fontFamily: "Montserrat", fontSize: 15, marginTop: 10, marginBottom: 20}}
+      >
+        {data.map((item) => {
+          return <MenuItem value={item.name} style={{fontFamily: "Montserrat", fontSize: 15}}>{item.name}</MenuItem>
+        })}
+      </Select>
+      </FormControl>
+
+      <div style={{fontFamily: "Montserrat", fontSize: 15}}>
+           Colour
+      </div>
+      <div style={{flexDirection: "row", padding: 2, marginBottom: 20}}>
+      {colors.map((color) => {
+                return <Radio 
+                {...controlColorProps(color.name)} 
+                icon={<span style={{display: "inline-block", borderWidth: 10, backgroundColor: color.hex, width: 16, height: 16, borderRadius: "100%"}}/>}
+                checkedIcon={<div style={{backgroundColor: color.hex, width: 16, height: 16, borderRadius: "100%"}}/>}
+                />
+      })}
+      </div>
+
+      <div style={{fontFamily: "Montserrat", fontSize: 15}}>
+           Fit
+      </div>
+      <RadioGroup row defaultValue="fitted" style={{fontFamily: "Montserrat", fontSize: 15, marginBottom: 20}}>
+      <FormControlLabel {...controlFitProps('fitted')} control={<Radio color="default"/>} label="fitted" style={{fontFamily: "Montserrat", fontSize: 15}}/>
+        <FormControlLabel {...controlFitProps('relaxed')} control={<Radio color="default"/>} label="relaxed" />
+      </RadioGroup>
+
+      <div style={{fontFamily: "Montserrat", fontSize: 15}}>
+           Length
+      </div>
+      <FormControl sx={{ minWidth: 210, }} size="small">
+      <Select
+        labelId="demo-select-small"
+        id="fit"
+        value={length}
+        onChange={(event) => setLength(event.target.value)}
+        style={{fontFamily: "Montserrat", fontSize: 15, marginTop: 10, marginBottom: 20}}
+      >
+        <MenuItem value="cropped" style={{fontFamily: "Montserrat", fontSize: 15}}>Cropped</MenuItem>
+        <MenuItem value="regular" style={{fontFamily: "Montserrat", fontSize: 15}}>Regular</MenuItem>
+        <MenuItem value="long" style={{fontFamily: "Montserrat", fontSize: 15}}>Long</MenuItem>
+      </Select>
+</FormControl>
+    <div style={{flexDirection:"row", marginBottom: 20, justifyContent: "right", marginLeft: 100}}>
+    <button className="btn-add" style={{fontFamily: "Montserrat"}} onClick={() => addClosetItem(type, color, fit, length)}>Add to closet</button>
+    </div>
+        </div>
+      </Modal>
+      </div>
       <div className='lists' style={{flexDirection: "column", maxWidth: 250}}>
 
         {lists && lists.map((item) => {

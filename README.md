@@ -1,3 +1,12 @@
+# To run as Chrome extension:
+- Run `npm run build`
+- Navigate to [chrome://extensions/](chrome://extensions/)
+- Enable developer mode
+- Select "Load unpacked"
+<img src="https://user-images.githubusercontent.com/69866375/187016499-38fdc314-0e65-4e39-bf3e-991001506541.png" width="500">
+
+- Choose the "build" folder that was created
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

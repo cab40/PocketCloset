@@ -5,29 +5,3 @@
 .lists{
   display: flex;
 }
-
-.btn-discard{
-  background-color: #AFBCCF;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 10px;
-  color: #5E5E5E; 
-  font-weight: bold; 
-}
-
-.btn-add{
-  background-color: #D2AF9E;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 10px;
-  color: #5E5E5E; 
-  font-weight: bold; 
-}
-
-.add-button:hover{
-  opacity: 80%;
-}
-
-.add-button:active{
-  opacity: 50%; 
-}

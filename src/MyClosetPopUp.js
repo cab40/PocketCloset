@@ -18,6 +18,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 // import { styled } from '@mui/material/styles';
 import closeIcon from "./close.png"; 
+import logo from "./logo.png"; 
+import leaves from "./leaves.png"; 
 import "./MyClosetPopUp.css"; 
 
 let data = [
@@ -158,9 +160,13 @@ function MyClosetPopUp() {
     }
     return (
         <div>
-        <h3 style={{fontFamily: "Montserrat"}}>My closet
-        <img src={addIcon} style={{width: 25, height: 25, marginLeft: 130, marginBottom:-5}} className="add-button" onClick={() => setShowAddItem(true)}/>
-        </h3>
+        <div className="closetHeader" style={{fontFamily: "Montserrat", fontWeight: "bold"}}>
+        <img src={logo} style={{width: 25, height: 25, marginBottom:-5}} className="logo"/>
+        <span style={{marginRight: 65}}>
+        My closet
+        </span>
+        <img src={addIcon} style={{width: 25, height: 25, marginBottom:-5}} className="add-button" onClick={() => setShowAddItem(true)}/>
+        </div>
         <div>
         <Modal
         open={showAddItem}

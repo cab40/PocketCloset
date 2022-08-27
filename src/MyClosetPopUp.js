@@ -161,25 +161,28 @@ function MyClosetPopUp() {
     return (
         <div>
         <div className="closetHeader" style={{fontFamily: "Montserrat", fontWeight: "bold"}}>
-        <img src={logo} style={{width: 25, height: 25, marginBottom:-5}} className="logo"/>
-        <span style={{marginRight: 65}}>
+        <img src={logo} style={{width: 40, height: 40, marginBottom:-5}} className="logo"/>
+        <span style={{marginRight: 45}}>
         My closet
         </span>
         <img src={addIcon} style={{width: 25, height: 25, marginBottom:-5}} className="add-button" onClick={() => setShowAddItem(true)}/>
         </div>
+        <img src={leaves} style={{width: 25, height: 25, marginLeft: 130, marginBottom: -5}} className="logo"/>
+        <div style={{backgroundColor: "#436751", height: 2}}></div>
+        <br />
         <div>
         <Modal
         open={showAddItem}
         onClose={() => setShowAddItem(false)}
         style={{marginLeft: 20, marginTop: 50, overflowY: "scroll", paddingBottom: 15}}
       >
-        <div style={{maxWidth: 210, maxHeight: 450, backgroundColor: "white", borderRadius: 8, padding: 20}}>
+        <div style={{maxWidth: 250, maxHeight: 450, backgroundColor: "white", borderRadius: 8, padding: 20}}>
         <h3 style={{fontFamily: "Montserrat", marginTop: 10}} >
            New item: 
-           <img src={closeIcon} style={{width: 20, height: 20, marginLeft: 110, marginBottom: -5}} className="add-button" onClick={() => setShowAddItem(false)}/>
+           <img src={closeIcon} style={{width: 20, height: 20, marginLeft: 150, marginBottom: -5}} className="add-button" onClick={() => setShowAddItem(false)}/>
         </h3>
       
-      <FormControl sx={{ minWidth: 210, }} size="small">
+      <FormControl sx={{ minWidth: 250, }} size="small">
       <div style={{fontFamily: "Montserrat", fontSize: 15}}>
            Type
       </div>
@@ -220,7 +223,7 @@ function MyClosetPopUp() {
       <div style={{fontFamily: "Montserrat", fontSize: 15}}>
            Length
       </div>
-      <FormControl sx={{ minWidth: 210, }} size="small">
+      <FormControl sx={{ minWidth: 250, }} size="small">
       <Select
         labelId="demo-select-small"
         id="fit"
@@ -233,7 +236,7 @@ function MyClosetPopUp() {
         <MenuItem value="long" style={{fontFamily: "Montserrat", fontSize: 15}}>Long</MenuItem>
       </Select>
 </FormControl>
-    <div style={{flexDirection:"row", marginBottom: 20, justifyContent: "right", marginLeft: 100}}>
+    <div style={{flexDirection:"row", marginBottom: 20, justifyContent: "right", marginLeft: 130}}>
     <button className="btn-add" style={{fontFamily: "Montserrat"}} onClick={() => addClosetItem(type, color, fit, length)}>Add to closet</button>
     </div>
         </div>

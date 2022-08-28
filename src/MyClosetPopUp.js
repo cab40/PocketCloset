@@ -118,11 +118,13 @@ function MyClosetPopUp() {
 
     const addClosetItem = (type, color, fit, length) => {
       console.log("items: ", closetItems); 
-      setClosetItems(current => [...current, {type: type, color: color, fit: fit, length: length}])
+      let id = 0;
+      setClosetItems(current => [...current, {identifier: id, type: type, color: color, fit: fit, length: length}])
       for (let i = 0; i < 5; i++) {
         if (data[i].name === type) {
+          id = data[i].pieces.length;
           data[i].quantity++; 
-          data[i].pieces.push({color: color, fit: fit, length: length})
+          data[i].pieces.push({identifier: id, color: color, fit: fit, length: length})
         }
       }
       console.log("updated items: ", closetItems); 

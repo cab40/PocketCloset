@@ -8,31 +8,64 @@
     flex-direction: row;
     justify-content: right;
     margin-left: 140px;
-  }
+}
   
-  .noti-txt-btn{
+.noti-txt-btn{
     padding-top: 100px;
-  }
-  
-  .noti-list{
+}
+
+.noti-list{
     background-color: var(--main-accent);
     padding: 10px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-  }
-  
-  .container{
+}
+
+.container{
     padding: 10px;
-  }
+}
+
+.pls{
+    flex: auto;
+    justify-content: flex-start;
+}
 
 .action-txt{
     font-family: 'Montserrat','Segoe UI' !important;
     color: var(--dark-txt);
     font-size: 14px;
     font-weight: medium;
-  }
+}
   
-  .action-txt:hover{
+.action-txt:hover{
     cursor: pointer;
     color: black;
-  }
+}
+
+.btn-cart{
+    background-color: var(--main-accent);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 10px;
+    color: var(--dark-txt); 
+    font-weight: bold;
+    width: 150px;
+    justify-content: right;
+    margin-right: -20px;
+    font-family: 'Montserrat','Segoe UI' !important;
+}
+
+.btn-cart:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.sample-btn{
+    border: none;
+    color: var(--dark-txt); 
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 0px 10px 10px 0px;
+    background-color: var(--main-bg-color);
+}
+  

@@ -26,25 +26,6 @@ h3, .h3{
   display: flex;
 }
 
-.btn-discard{
-  background-color: #AFBCCF;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 10px;
-  color: var(--dark-txt); 
-  font-weight: bold; 
-}
-
-.btn-add{
-  background-color: var(--main-accent);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 10px;
-  color: var(--dark-txt); 
-  font-weight: bold;
-  font-family: 'Montserrat','Segoe UI' !important;
-}
-
 .product-detail{
   background-color: white;
   opacity: 85%; 
@@ -56,11 +37,6 @@ h3, .h3{
   margin-right: 4px; 
   font-family: 'Montserrat','Segoe UI' !important;
   font-size: 12px;
-}
-
-.btn-add:hover{
-  opacity: 80%;
-  cursor: pointer;
 }
 
 .add-button:active{

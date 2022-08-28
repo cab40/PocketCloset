@@ -5,15 +5,3 @@
 .lists{
   display: flex;
 }
-
-.button{
-  background-color: tomato;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-weight: bold;
-}
-
-.button:hover{
-  border: 1px solid black;
-}

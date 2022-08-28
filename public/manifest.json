@@ -3,6 +3,17 @@
   "description": "pls work",
   "version": "1.0",
   "manifest_version": 3,
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["https://www.garageclothing.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.garageclothing.com/*"],
+      "js": ["contentScript.js"]
+    }
+  ],
   "action": {
     "default_title": "technova-2022",
     "default_popup": "index.html",

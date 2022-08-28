@@ -8,7 +8,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import "@fontsource/montserrat";
-import { AccordionCollapse } from "react-bootstrap";
 import addIcon from "./add.png"; 
 // import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,38 +18,46 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 // import { styled } from '@mui/material/styles';
 import closeIcon from "./close.png"; 
+import logo from "./logo.png"; 
+import leaves from "./leaves.png"; 
+import "./MyClosetPopUp.css"; 
 
-const data = [
+let data = [
     {
       key: 0,
       name: "Tops",
-      quantity: 2, 
-      pieces: ["Tank top", "blah blah blah"]
+      quantity: 0, 
+      pieces: [], 
     }, 
     {
         key: 1,
         name: "Pants", 
-        quantity: 2, 
+        quantity: 0, 
+        pieces: [], 
     }, 
     {
         key: 2,
         name: "Jeans", 
-        quantity: 4, 
+        quantity: 0, 
+        pieces: [], 
     }, 
     {
         key: 3,
         name: "Sweaters & Cardigans", 
-        quantity: 13, 
+        quantity: 0, 
+        pieces: [], 
     },
     {
         key: 4,
         name: "Hoodies & Sweatshirts", 
-        quantity: 13, 
+        quantity: 0, 
+        pieces: [], 
     },
     {
         key: 5,
         name: "Skirts", 
-        quantity: 13, 
+        quantity: 0, 
+        pieces: [], 
     }
   ]
 
@@ -99,19 +106,30 @@ function MyClosetPopUp() {
     const [fit, setFit] = React.useState("fitted"); 
     const [length, setLength] = React.useState(""); 
     const [color, setColor] = React.useState(""); 
+    // const [tops, setTops] = React.useState([]); 
+    // const [pants, setPants] = React.useState([]); 
+    // const [jeans, setJeans] = React.useState([]); 
+    // const [sweaters, setSweaters] = React.useState([]); 
+    // const [hoodies, setHoodies] = React.useState([]); 
+    // const [skirts, setSkirts] = React.useState
 
     const initialState = [{type: "", color: "", fit: "", length: ""}]
     const [closetItems, setClosetItems] = useState([{}]); 
 
     const addClosetItem = (type, color, fit, length) => {
       console.log("items: ", closetItems); 
-      setClosetItems(current => [...current, {type: type, color: color, fit: fit, length: length}])
+      let id = 0;
+      setClosetItems(current => [...current, {identifier: id, type: type, color: color, fit: fit, length: length}])
+      for (let i = 0; i < 5; i++) {
+        if (data[i].name === type) {
+          id = data[i].pieces.length;
+          data[i].quantity++; 
+          data[i].pieces.push({identifier: id, color: color, fit: fit, length: length})
+        }
+      }
       console.log("updated items: ", closetItems); 
       setShowAddItem(false); 
     }
-
-    //      console.log("type: ", type, ", color: ", color, ", fit: ", fit, ", length: ", length)
-
 
     const handleFit = (event) => {
       setFit(event.target.value);
@@ -144,22 +162,29 @@ function MyClosetPopUp() {
     }
     return (
         <div>
-        <h3 style={{fontFamily: "Montserrat"}}>My closet
-        <img src={addIcon} style={{width: 25, height: 25, marginLeft: 130, marginBottom:-5}} className="add-button" onClick={() => setShowAddItem(true)}/>
-        </h3>
+        <div className="closetHeader" style={{fontFamily: "Montserrat", fontWeight: "bold"}}>
+        <img src={logo} style={{width: 40, height: 40, marginBottom:-5}} className="logo"/>
+        <span style={{marginRight: 45}}>
+        My closet
+        </span>
+        <img src={addIcon} style={{width: 25, height: 25, marginBottom:-5}} className="add-button" onClick={() => setShowAddItem(true)}/>
+        </div>
+        <img src={leaves} style={{width: 25, height: 25, marginLeft: 130, marginBottom: -5}} className="logo"/>
+        <div style={{backgroundColor: "#436751", height: 2}}></div>
+        <br />
         <div>
         <Modal
         open={showAddItem}
         onClose={() => setShowAddItem(false)}
         style={{marginLeft: 20, marginTop: 50, overflowY: "scroll", paddingBottom: 15}}
       >
-        <div style={{maxWidth: 210, maxHeight: 450, backgroundColor: "white", borderRadius: 8, padding: 20}}>
+        <div style={{maxWidth: 250, maxHeight: 450, backgroundColor: "white", borderRadius: 8, padding: 20}}>
         <h3 style={{fontFamily: "Montserrat", marginTop: 10}} >
            New item: 
-           <img src={closeIcon} style={{width: 20, height: 20, marginLeft: 110, marginBottom: -5}} className="add-button" onClick={() => setShowAddItem(false)}/>
+           <img src={closeIcon} style={{width: 20, height: 20, marginLeft: 150, marginBottom: -5}} className="add-button" onClick={() => setShowAddItem(false)}/>
         </h3>
       
-      <FormControl sx={{ minWidth: 210, }} size="small">
+      <FormControl sx={{ minWidth: 250, }} size="small">
       <div style={{fontFamily: "Montserrat", fontSize: 15}}>
            Type
       </div>
@@ -200,7 +225,7 @@ function MyClosetPopUp() {
       <div style={{fontFamily: "Montserrat", fontSize: 15}}>
            Length
       </div>
-      <FormControl sx={{ minWidth: 210, }} size="small">
+      <FormControl sx={{ minWidth: 250, }} size="small">
       <Select
         labelId="demo-select-small"
         id="fit"
@@ -213,13 +238,13 @@ function MyClosetPopUp() {
         <MenuItem value="long" style={{fontFamily: "Montserrat", fontSize: 15}}>Long</MenuItem>
       </Select>
 </FormControl>
-    <div style={{flexDirection:"row", marginBottom: 20, justifyContent: "right", marginLeft: 100}}>
+    <div style={{flexDirection:"row", marginBottom: 20, justifyContent: "right", marginLeft: 130}}>
     <button className="btn-add" style={{fontFamily: "Montserrat"}} onClick={() => addClosetItem(type, color, fit, length)}>Add to closet</button>
     </div>
         </div>
       </Modal>
       </div>
-      <div className='lists' style={{flexDirection: "column", maxWidth: 250}}>
+      <div className='lists' style={{flexDirection: "column", maxWidth: 300}}>
 
         {lists && lists.map((item) => {
           return(
@@ -228,8 +253,18 @@ function MyClosetPopUp() {
                 </AccordionSummary>
                 <AccordionDetails>
           <div>
-            {item.pieces && item.pieces.map((piece) => {
-                return <div>{piece}</div>
+            {item.pieces.length !==0 && item.pieces.map((piece, index) => {
+                let colorIndex = colors.map(object => object.name).indexOf(piece.color); 
+                let num = index + 1;
+                return <div style={{flexDirection: "row", marginBottom: 15}}>
+                  <span>{num + " : "}</span>
+                  <span className="product-detail">
+                  <span style={{display: "inline-block", backgroundColor: colors[colorIndex].hex, width: 10, height: 10, marginRight: 4, alignItems: "center",  borderRadius: "100%"}}/>
+                  <span>{piece.color}</span>
+                  </span>
+                 <span className="product-detail"> {piece.fit} </span>
+                 <span className="product-detail"> {piece.length} </span>
+                 </div>
             })}
           </div>
         </AccordionDetails>

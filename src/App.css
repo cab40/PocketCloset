@@ -1,3 +1,23 @@
+:root{
+  --main-bg-color: #F5F5F5;
+  --main-accent: #D2AF9E;
+  --dark-txt: #363636;
+  background-color: var(--main-bg-color);
+  font-family: 'Montserrat','Segoe UI' !important;
+}
+
+h2, .h2{
+  font-family: 'Montserrat','Segoe UI' !important;
+  font-size: 24px;
+  font-weight: medium;
+}
+
+h3, .h3{
+  font-family: 'Montserrat','Segoe UI' !important;
+  font-size: 18px !important;
+  font-weight: normal !important;
+}
+
 .App{
   padding: 0px 20px;
 }
@@ -11,21 +31,36 @@
   border: none;
   border-radius: 8px;
   padding: 10px 10px;
-  color: #5E5E5E; 
+  color: var(--dark-txt); 
   font-weight: bold; 
 }
 
 .btn-add{
-  background-color: #D2AF9E;
+  background-color: var(--main-accent);
   border: none;
   border-radius: 8px;
   padding: 10px 10px;
-  color: #5E5E5E; 
-  font-weight: bold; 
+  color: var(--dark-txt); 
+  font-weight: bold;
+  font-family: 'Montserrat','Segoe UI' !important;
 }
 
-.add-button:hover{
+.product-detail{
+  background-color: white;
+  opacity: 85%; 
+  border-radius: 5px;
+  padding-left: 4px;
+  padding-right: 4px; 
+  padding-top: 3px; 
+  padding-bottom: 3px; 
+  margin-right: 4px; 
+  font-family: 'Montserrat','Segoe UI' !important;
+  font-size: 12px;
+}
+
+.btn-add:hover{
   opacity: 80%;
+  cursor: pointer;
 }
 
 .add-button:active{

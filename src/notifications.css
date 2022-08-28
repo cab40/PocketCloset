@@ -1,0 +1,38 @@
+:root{
+    --main-bg-color: #F5F5F5;
+    --main-accent: #D2AF9E;
+    --dark-txt: #363636;
+}
+
+.noti-btn{
+    flex-direction: row;
+    justify-content: right;
+    margin-left: 140px;
+  }
+  
+  .noti-txt-btn{
+    padding-top: 100px;
+  }
+  
+  .noti-list{
+    background-color: var(--main-accent);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  }
+  
+  .container{
+    padding: 10px;
+  }
+
+.action-txt{
+    font-family: 'Montserrat','Segoe UI' !important;
+    color: var(--dark-txt);
+    font-size: 14px;
+    font-weight: medium;
+  }
+  
+  .action-txt:hover{
+    cursor: pointer;
+    color: black;
+  }
